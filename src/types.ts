@@ -39,7 +39,7 @@ export interface ProviderConfig {
    */
   clientSideID: string;
 
-  ldClient?: LDClient;
+  ldClient?: LDClient | Promise<LDClient>;
 
   /**
    * A LaunchDarkly user object. If unspecified, a new user with a
