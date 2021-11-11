@@ -24,14 +24,11 @@ import { camelCaseKeys, fetchFlags, getFlattenedFlagsFromChangeset } from './uti
  */
 class LDProvider extends React.Component<ProviderConfig, HocState> implements EnhancedComponent {
   readonly state: Readonly<HocState>;
-  ldClient?: LDClient | Promise<LDClient>;
-
   constructor(props: ProviderConfig) {
     super(props);
 
-    const { options, ldClient } = props;
+    const { options } = props;
 
-    this.ldClient = ldClient;
     this.state = {
       flags: {},
       ldClient: undefined,
@@ -64,7 +61,7 @@ class LDProvider extends React.Component<ProviderConfig, HocState> implements En
 
   initLDClient = async () => {
     const { clientSideID, flags, options, user } = this.props;
-    let ldClient = await this.ldClient;
+    let ldClient = await this.props.ldClient;
     const reactOptions = this.getReactOptions();
     let fetchedFlags;
     if (ldClient) {
